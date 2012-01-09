@@ -6,4 +6,6 @@ module FotoliaRest
       @message = message
     end
   end
+
+  class FotoliaError < StandardError; end
 end
