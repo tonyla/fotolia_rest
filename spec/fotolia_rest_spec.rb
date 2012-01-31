@@ -34,6 +34,13 @@ describe "FotoliaRest" do
         result.response.should_not be_nil
         puts result.response
       end
+
+      it "should error on invalid calls" do
+        result = @client.execute( 'asdf', '1234' )
+        result.success?.should be_false
+        result.response.should_not be_nil
+        result.error.should be_kind_of(FotoliaRest::FotoliaApiError)
+      end
     end
 
     describe "invalid credentials" do
@@ -47,6 +54,20 @@ describe "FotoliaRest" do
         result.error.code.should_not be_nil
         result.error.code.should eql('010')
         result.error.message.should_not be_nil
+      end
+    end
+
+    describe "timeout" do
+      before( :each ) do
+        @client = FotoliaRest::Client.new('','','')
+      end
+
+      it "should result in a timeout exception" do
+        using_constants( FotoliaRest::Client, :BASE_URL => 'nowhere.nowhere.nowhere' ) do
+          expect {
+            @client.execute('anything', 'at', :all => true)
+          }.to raise_error(FotoliaRest::FotoliaError)
+        end
       end
     end
   end

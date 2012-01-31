@@ -4,9 +4,9 @@ require 'cgi'
 require 'json'
 module FotoliaRest
   class Client
-
     BASE_URL = 'api.fotolia.com'
     attr_reader :api_key, :username, :password, :session_id
+
     def initialize(api_key, username, password)
       @api_key = api_key
       @username = username
@@ -35,6 +35,7 @@ module FotoliaRest
       begin
         uri = URI.parse(compose_uri(method, function))
         http = Net::HTTP.new(uri.host, uri.port)
+        http.open_timeout = http.read_timeout = 5 # seconds
         if http_method == :get
           uri.query = URI.encode_www_form(fotolia_parameters(args))
           request = Net::HTTP::Get.new(uri.request_uri)
