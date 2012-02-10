@@ -60,6 +60,10 @@ module FotoliaRest
       end
     end
 
+    def download_media(url)
+      open(url, 'rb', :http_basic_authentication => [ @api_key, @session_id ])
+    end
+
     protected
 
     def fotolia_parameters(args)
