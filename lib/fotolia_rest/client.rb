@@ -52,11 +52,11 @@ module FotoliaRest
         Result.parse(response)
       rescue Timeout::Error => e
         log(:error, "Timeout error with #{method} #{args.inspect}")
-        raise FotoliaError.new("Fotolia Communication Error: timeout")
+        raise FotoliaRest::FotoliaError.new("Fotolia Communication Error: timeout")
       rescue => e
         log(:error, "Fotolia client error with #{method} #{args.inspect} #{e.message}")
         e.backtrace.each{|line| log(:debug, line)}
-        raise FotoliaError.new("Fotolia Communication Error: #{e.message}")
+        raise FotoliaRest::FotoliaError.new("Fotolia Communication Error: #{e.message}")
       end
     end
 
