@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "fotolia_rest"
-  s.version = "0.0.2"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony La"]
-  s.date = "2012-02-10"
+  s.date = "2012-07-06"
   s.description = "Wrapper library for the Fotolia API"
   s.email = "tonyla@pingg.com"
   s.extra_rdoc_files = [
